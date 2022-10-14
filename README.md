@@ -1,4 +1,4 @@
-**NOTE: This is still in testing/development**
+**Status: Testing/development is done for this, but I'd still recommend doing a quick test on the development site before loading on production, to be sure there aren't any issues with a specific site**
 
 # Pause Renewal Actions
 This mini-plugin allows a WooCommerce store to pause all WooCommerce Subscription renewals, while still allowing other scheduled actions to continue running.
