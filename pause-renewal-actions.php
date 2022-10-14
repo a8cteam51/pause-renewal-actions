@@ -34,11 +34,13 @@ define( 'PAUSE_RENEWAL_ACTIONS_BASENAME', plugin_basename( __FILE__ ) );
 
 require_once __DIR__ . '/includes/admin.php';
 
-if ( 'on' === get_option( 'pause_renewal_actions_toggle' ) ) {
-	add_action( 'action_scheduler_pre_init', function() {
+
+add_action( 'action_scheduler_pre_init', function() {
+	if ( 'on' === get_option( 'pause_renewal_actions_toggle' ) ) {
 		require_once __DIR__ . '/includes/classes/class-actionscheduler-custom-dbstore.php';
 		add_filter( 'action_scheduler_store_class', function( $class ) {
 			return 'ActionScheduler_Custom_DBStore';
 		}, 101, 1 );
-	});
-}
+	}
+});
+

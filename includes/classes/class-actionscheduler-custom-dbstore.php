@@ -18,7 +18,7 @@ class ActionScheduler_Custom_DBStore extends ActionScheduler_DBStore {
 			current_time( 'mysql' ),
 		);
 
-		$where    = 'WHERE claim_id = 0 AND scheduled_date_gmt <= %s AND status=%s AND NOT hook = woocommerce_scheduled_subscription_payment';
+		$where    = 'WHERE claim_id = 0 AND scheduled_date_gmt <= %s AND status=%s AND hook != "woocommerce_scheduled_subscription_payment"';
 		$params[] = $date->format( 'Y-m-d H:i:s' );
 		$params[] = self::STATUS_PENDING;
 
@@ -49,6 +49,24 @@ class ActionScheduler_Custom_DBStore extends ActionScheduler_DBStore {
 			$where   .= ' AND group_id = %d';
 			$params[] = $group_id;
 		}
+
+		/**
+		 * Sets the order-by clause used in the action claim query.
+		 *
+		 * @since 3.4.0
+		 *
+		 * @param string $order_by_sql
+		 */
+		$order    = apply_filters( 'action_scheduler_claim_actions_order_by', 'ORDER BY attempts ASC, scheduled_date_gmt ASC, action_id ASC' );
+		$params[] = $limit;
+
+		$sql           = $wpdb->prepare( "{$update} {$where} {$order} LIMIT %d", $params ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders
+		$rows_affected = $wpdb->query( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		if ( false === $rows_affected ) {
+			throw new \RuntimeException( __( 'Unable to claim actions. Database error.', 'action-scheduler' ) );
+		}
+
+		return (int) $rows_affected;
 	}
 
 }
