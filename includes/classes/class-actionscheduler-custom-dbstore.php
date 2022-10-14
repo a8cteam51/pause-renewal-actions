@@ -3,6 +3,7 @@
 class ActionScheduler_Custom_DBStore extends ActionScheduler_DBStore {
 
 	protected function claim_actions( $claim_id, $limit, \DateTime $before_date = null, $hooks = array(), $group = '' ) {
+
 		/** @var \wpdb $wpdb */
 		global $wpdb;
 
@@ -17,11 +18,19 @@ class ActionScheduler_Custom_DBStore extends ActionScheduler_DBStore {
 			current_time( 'mysql' ),
 		);
 
-		$where    = 'WHERE claim_id = 0 AND scheduled_date_gmt <= %s AND status=%s AND hook != woocommerce_scheduled_subscription_payment';
+		$where    = 'WHERE claim_id = 0 AND scheduled_date_gmt <= %s AND status=%s AND NOT hook = woocommerce_scheduled_subscription_payment';
 		$params[] = $date->format( 'Y-m-d H:i:s' );
 		$params[] = self::STATUS_PENDING;
 
 		if ( ! empty( $hooks ) ) {
+			// Given value to delete 
+			$val = 'woocommerce_scheduled_subscription_payment';
+			
+			// Delete element by value using array_splice()
+			$key = array_search( $val, $hooks );
+			if ( false !== $key ) {
+				array_splice( $hooks, array_search( $val, $hooks ), 1);
+			}
 			$placeholders = array_fill( 0, count( $hooks ), '%s' );
 			$where       .= ' AND hook IN (' . join( ', ', $placeholders ) . ')';
 			$params       = array_merge( $params, array_values( $hooks ) );
