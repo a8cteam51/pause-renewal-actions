@@ -73,8 +73,45 @@ input[type="checkbox"].pause-renewal-actions-toggle:checked:after {
 .pause-renewal-actions-settings-wrap ul {
 	padding-left: 20px;
 }
+
 .pause-renewal-actions-settings-wrap ul li {
 	list-style: disc;
 }
 
-    
+.toggle-el {
+    transition: all 0.2s ease;
+    height: 0px;
+    background: white;
+    overflow:hidden;
+    width:600px;
+}
+
+input[type=checkbox].hide-input:checked + .toggle-el {
+    height: 500px;
+}
+
+input.hide-input {
+    position: absolute;
+    left: -999em;
+}
+
+label.toggle {
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: underline;
+}
+
+pre {
+	width: 600px;
+    font-family:'Courier New', Courier, monospace;
+    padding:10px;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap !important;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    background: #fff;
+    height:0px;
+}

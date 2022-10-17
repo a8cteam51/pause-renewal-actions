@@ -100,16 +100,19 @@ function render_options_html() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
+	$readme = file_get_contents( __DIR__ . '/../README.md' );
 	?>
 	<div class="pause-renewal-actions-settings-wrap">
 		<h1 id="pause-renewal-actions-settings-title"><?php echo esc_html( get_admin_page_title() ); ?></h1>
-		<p>Notes:
-			<ul>
-				<li>This pauses `woocommerce_scheduled_subscription_payment` actions. </li>
-				<li>As soon as they are unpaused, any past-due actions will start to run.</li>
-				<li>This does not pause any other actions, such as failed payment retries.</li>
-			</ul>
-		</p>
+		<label for="readme" class="toggle">README</label>
+		<input type="checkbox" name="one" id="readme" class="hide-input">
+		<div class="toggle-el">
+			<div>
+				<pre>
+					<?php echo $readme; ?>
+				</pre>
+			</div>
+		</div>
 		<form action="options.php" method="post">
 			<?php
 			settings_fields( 'pause-renewal-actions' );

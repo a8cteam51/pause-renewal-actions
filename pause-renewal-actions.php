@@ -43,4 +43,3 @@ add_action( 'action_scheduler_pre_init', function() {
 		}, 101, 1 );
 	}
 });
-
