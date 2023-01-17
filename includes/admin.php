@@ -79,7 +79,7 @@ function settings_init() {
  * @return void
  */
 function render_field( array $args = array() ) {
-
+	$checked = '';
 	if ( 'on' === get_option( 'pause_renewal_actions_toggle' ) ) {
 		$checked = ' checked="checked" '; }
 		$html  = '';
