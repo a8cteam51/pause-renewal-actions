@@ -28,6 +28,9 @@ if ( defined( 'PAUSE_RENEWAL_ACTIONS_PATH' ) ) {
 	return;
 }
 
+// this won't update the option if it already exists.
+add_option( 'pause_renewal_actions_toggle', 'on' );
+
 define( 'PAUSE_RENEWAL_ACTIONS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'PAUSE_RENEWAL_ACTIONS_URL', plugin_dir_url( __FILE__ ) );
 define( 'PAUSE_RENEWAL_ACTIONS_BASENAME', plugin_basename( __FILE__ ) );
