@@ -13,5 +13,8 @@ This mini-plugin allows a WooCommerce store to pause all WooCommerce Subscriptio
 - This does not pause any other actions.
 - This doesn't work for the old PayPal Standard subscriptions or the WC Pay subscriptions that aren't associated with the WooCommerce Subscriptions plugin; it only works with subscriptions managed by WooCommerce Subscriptions.
 
+![Screen-Shot-on-2022-10-17-at-101301](https://github.com/a8cteam51/pause-renewal-actions/assets/2067992/6bd3c11d-e8ac-4606-92cd-b7b6ebe611eb)
+
+
 ### Changelog
 2022-10-17 - Version 1.0.0
