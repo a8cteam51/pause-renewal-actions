@@ -1,3 +1,7 @@
+| :exclamation:  This is a public repository |
+|--------------------------------------------|
+
+
 **Status:** Testing/development is done for this, but I'd still recommend doing a quick test on the development site before loading on production, to be sure there aren't any issues with a specific site.
 
 # Pause Renewal Actions
